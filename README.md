@@ -1,2 +1,1 @@
-Readme File
-hello this is checking the gitdoc
+### Smart Personal Finance Tracker
