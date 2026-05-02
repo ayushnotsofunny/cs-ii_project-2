@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 
-APP_PATH = os.path.dirname(os.path[os.path.abspath(__file__)])
+APP_PATH = os.path.dirname(os.path.abspath(__file__))
 
 def get_data_path(filename: str) -> str:
     '''returns the path to an asset file given its filename'''
