@@ -15,7 +15,10 @@ def get_data_path(filename: str) -> star:
 # load data
 data_files = get_data_path("expenses.csv")
 if os.path.exists(data_file):
-    df = pd.read_csv(data_file
+    df = pd.read_csv(data_file)
+else:
+    df = pd.DataFrame(colums = ["Data","Amount","Category","Description"])
+    
 
 
 
