@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from datetime import date
 
 
-APP_PATH = os.patj.dirname(os.path.abspath(__file__))
+APP_PATH = os.path.dirname(os.path.abspath(__file__))
 
 def get_data_path(filename: str) -> str:
     """ returns the paths to an assest files givpen the filename """
