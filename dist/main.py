@@ -40,7 +40,7 @@ elif page == "History":
 elif page == "Add Expense":
     st.header("Add New expenses")
     with st.form("expense_form"):
-        date = st.data_input("Date")
+        date = st.date_input("Date")
         amount = st.number_input("Amount", min_value=0.0)
         category = st.text_input("Category")
         description = st.text_input("Description")
