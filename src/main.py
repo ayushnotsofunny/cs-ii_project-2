@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from datetime import date
 
 
-
+APP_PATH = os.patj
 
 
 
