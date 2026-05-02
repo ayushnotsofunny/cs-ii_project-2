@@ -37,7 +37,7 @@ elif page == "History":
     st.header("Expense History")
     st.dataframe(df)
 
-elif page == "Add Expenses":
+elif page == "Add Expense":
     st.header("Add New expenses")
     with st.form("expense_form"):
         date = st.data_input("Date")
