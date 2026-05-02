@@ -18,7 +18,10 @@ if os.path.exists(data_file):
     df = pd.read_csv(data_file)
 else:
     df = pd.DataFrame(colums = ["Data","Amount","Category","Description"])
-    
+
+st.title("Personal Finance Tracker")
+
+
 
 
 
