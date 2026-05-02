@@ -29,7 +29,7 @@ if page == "Dashboard":
     st.header("Dashboard")
     if not df.empty:
         st.write("Total Expenses:", df["Amount"].sum())
-        st.bar_chart(df.groupby("Category")["Amount".sum()])
+        st.bar_chart(df.groupby("Category")["Amount"].sum())
     else:
         st.write("No expenses yet.")
 
