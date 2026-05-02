@@ -17,7 +17,7 @@ data_files = get_data_path("expenses.csv")
 if os.path.exists(data_files):
     df = pd.read_csv(data_files)
 else:
-    df = pd.DataFrame(colums = ["Data","Amount","Category","Description"])
+    df = pd.DataFrame(columns = ["Data","Amount","Category","Description"])
 
 st.title("Personal Finance Tracker")
 
