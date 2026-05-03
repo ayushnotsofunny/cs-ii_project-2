@@ -43,14 +43,20 @@ def save_budgets(budgets):
 expenses_file = get_data_path("expenses.csv")
 income_file = get_data_path("income.csv")
 
-if os.path.exists(expenses_file):
-    df_expenses = pd.read_csv(expenses_file, parse_dates=["Date"])
-else:
+try:
+    if os.path.exists(expenses_file) and os.path.getsize(expenses_file) > 0:
+        df_expenses = pd.read_csv(expenses_file, parse_dates=["Date"])
+    else:
+        df_expenses = pd.DataFrame(columns=["Date", "Amount", "Category", "Description"])
+except Exception:
     df_expenses = pd.DataFrame(columns=["Date", "Amount", "Category", "Description"])
 
-if os.path.exists(income_file):
-    df_income = pd.read_csv(income_file, parse_dates=["Date"])
-else:
+try:
+    if os.path.exists(income_file) and os.path.getsize(income_file) > 0:
+        df_income = pd.read_csv(income_file, parse_dates=["Date"])
+    else:
+        df_income = pd.DataFrame(columns=["Date", "Amount", "Category", "Description"])
+except Exception:
     df_income = pd.DataFrame(columns=["Date", "Amount", "Category", "Description"])
 
 if "categories" not in st.session_state:
