@@ -23,6 +23,16 @@ def load_categories():
         except Exception:
             pass
     return ["Food", "Bills", "Transport", "Shopping", "Other"]
+def save_categories(categories):
+    with open(get_data_path("categories.json"), "w", encoding="utf-8") as f:
+        json.dump(categories, f, indent=2)
+
+data_file = get_data_path("expenses.csv")
+if os.path.exists(data_file):
+    df = pd.read_csv(data_file, parse_dates=["Date"])
+else:
+    df = pd.DataFrame(columns=["Date", "Amount", "Category", "Description"])
+
 
 
 # load data
