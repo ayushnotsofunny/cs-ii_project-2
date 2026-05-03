@@ -13,6 +13,17 @@ def get_data_path(filename: str) -> str:
     """ returns the paths to an assest files givpen the filename """
     return os.path.join(DATA_DIR, filename)
 
+def load_categories():
+    path = get_data_path("categories.json")
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return ["Food", "Bills", "Transport", "Shopping", "Other"]
+
+
 # load data
 data_files = get_data_path("expenses.csv")
 if os.path.exists(data_files):
