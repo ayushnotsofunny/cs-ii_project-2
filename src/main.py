@@ -11,8 +11,7 @@ os.makedirs(DATA_DIR, exist_ok=True)
 
 def get_data_path(filename: str) -> str:
     """ returns the paths to an assest files givpen the filename """
-    return os.path.join(APP_PATH, "data", filename)
-
+    return os.path.join(DATA_DIR, filename)
 
 # load data
 data_files = get_data_path("expenses.csv")
