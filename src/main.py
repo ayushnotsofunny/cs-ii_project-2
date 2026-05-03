@@ -71,7 +71,7 @@ st.write("Track expenses & income, manage budgets, and review analytics.")
 
 # Sidebar: Category & Budget Settings
 with st.sidebar:
-    st.header("⚙️ Settings")
+    st.header("Settings")
     
     tab_cat, tab_bud = st.tabs(["Categories", "Budgets"])
     
@@ -136,16 +136,16 @@ if page == "Dashboard":
                     spent = category_spending.get(cat, 0)
                     percentage = (spent / budget) * 100
                     if spent > budget:
-                        st.error(f"❌ {cat}: ${spent:,.2f} / ${budget:,.2f} ({percentage:.0f}%) - OVER BUDGET!")
+                        st.error(f" {cat}: ${spent:,.2f} / ${budget:,.2f} ({percentage:.0f}%) - OVER BUDGET!")
                     elif spent > budget * 0.8:
-                        st.warning(f"⚠️ {cat}: ${spent:,.2f} / ${budget:,.2f} ({percentage:.0f}%) - Approaching limit")
+                        st.warning(f" {cat}: ${spent:,.2f} / ${budget:,.2f} ({percentage:.0f}%) - Approaching limit")
                     else:
-                        st.info(f"✅ {cat}: ${spent:,.2f} / ${budget:,.2f} ({percentage:.0f}%)")
+                        st.info(f" {cat}: ${spent:,.2f} / ${budget:,.2f} ({percentage:.0f}%)")
     else:
         st.write("No data yet. Start by adding expenses and income.")
 
 elif page == "Expenses":
-    st.header("💸 Expenses")
+    st.header(" Expenses")
     
     col1, col2 = st.columns(2)
     
@@ -178,7 +178,7 @@ elif page == "Expenses":
             st.info("No expenses yet.")
 
 elif page == "Income":
-    st.header("💵 Income")
+    st.header(" Income")
     
     col1, col2 = st.columns(2)
     
@@ -211,7 +211,7 @@ elif page == "Income":
             st.info("No income yet.")
 
 elif page == "Edit/Delete":
-    st.header("✏️ Edit or Delete Entries")
+    st.header("Edit or Delete Entries")
     
     tab_exp_edit, tab_inc_edit = st.tabs(["Expenses", "Income"])
     
@@ -308,7 +308,7 @@ elif page == "Edit/Delete":
             st.info("No income to manage.")
 
 elif page == "Analytics":
-    st.header("📈 Analytics")
+    st.header("Analytics")
     
     if not df_expenses.empty or not df_income.empty:
         df_expenses["Date"] = pd.to_datetime(df_expenses["Date"])
@@ -360,5 +360,3 @@ elif page == "Analytics":
     else:
         st.write("No data yet.")
 
-st.markdown("---")
-st.caption("📝 Tip: Use Settings to add categories and set budgets. All data is saved locally in the 'data' folder.")
