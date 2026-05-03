@@ -23,6 +23,7 @@ def load_categories():
         except Exception:
             pass
     return ["Food", "Bills", "Transport", "Shopping", "Other"]
+
 def save_categories(categories):
     with open(get_data_path("categories.json"), "w", encoding="utf-8") as f:
         json.dump(categories, f, indent=2)
@@ -33,6 +34,11 @@ if os.path.exists(data_file):
 else:
     df = pd.DataFrame(columns=["Date", "Amount", "Category", "Description"])
 
+if "categories" not in st.session_state:
+    st.session_state.categories = load_categories()
+
+st.title("Personal Finance Tracker")
+st.write("Track expenses, add custom categories, and review monthly summaries.")
 
 
 # load data
