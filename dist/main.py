@@ -44,7 +44,7 @@ elif page == "Add Expense":
         amount = st.number_input("Amount", min_value=0.0)
         category = st.text_input("Category")
         description = st.text_input("Description")
-        submitted = st.form_submit_button("Add Expense")
+        submitted = st.form_submit_button("Add Expenses")
         if submitted:
             new_row = {"Date": date, "Amount": amount, "Category": category, "Description": description}
             df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
