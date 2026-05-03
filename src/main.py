@@ -6,6 +6,8 @@ from datetime import date
 
 
 APP_PATH = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(APP_PATH, "data")
+os.makedirs(DATA_DIR, exist_ok=True)
 
 def get_data_path(filename: str) -> str:
     """ returns the paths to an assest files givpen the filename """
