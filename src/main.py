@@ -75,7 +75,19 @@ with st.sidebar:
     
     tab_cat, tab_bud = st.tabs(["Categories", "Budgets"])
     
-   
+    with tab_cat:
+        st.subheader("Manage Categories")
+        new_category = st.text_input("Add custom category")
+        if st.button("Add category"):
+            new_category = new_category.strip()
+            if new_category == "":
+                st.warning("Enter a category name first.")
+            elif new_category in st.session_state.categories:
+                st.info("This category already exists.")
+            else:
+                st.session_state.categories.append(new_category)
+                save_categories(st.session_state.categories)
+                st.success(f"Category added: {new_category}")
     
     with tab_bud:
         st.subheader("Set Budget Limits")
