@@ -1,17 +1,14 @@
-import os
-import pandas as pd
 import streamlit as st
-import matplotlib.pyplot as plt
+import pandas as pd
+import os
 import json
 from datetime import date
-
 
 APP_PATH = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(APP_PATH, "data")
 os.makedirs(DATA_DIR, exist_ok=True)
 
 def get_data_path(filename: str) -> str:
-    """ returns the paths to an assest files givpen the filename """
     return os.path.join(DATA_DIR, filename)
 
 def load_categories():
@@ -40,77 +37,74 @@ if "categories" not in st.session_state:
 st.title("Personal Finance Tracker")
 st.write("Track expenses, add custom categories, and review monthly summaries.")
 
+with st.sidebar:
+    st.header("Category settings")
+    new_category = st.text_input("Add custom category")
+    if st.button("Add category"):
+        new_category = new_category.strip()
+        if new_category == "":
+            st.warning("Enter a category name first.")
+        elif new_category in st.session_state.categories:
+            st.info("This category already exists.")
+        else:
+            st.session_state.categories.append(new_category)
+            save_categories(st.session_state.categories)
+            st.success(f"Category added: {new_category}")
 
-# load data
-data_files = get_data_path("expenses.csv")
-if os.path.exists(data_files):
-    df = pd.read_csv(data_files)
-else:
-    df = pd.DataFrame(columns = ["Data","Amount","Category","Description"])
-
-st.title("Personal Finance Tracker")
-
-
-# Sidebar navigation
-
-page = st.sidebar.selectbox("Navigate", ["Dashboard", "History", "Add Expense"])
+page = st.sidebar.selectbox("Navigate", ["Dashboard", "Expense History", "Add Expense"])
 
 if page == "Dashboard":
     st.header("Dashboard")
     if not df.empty:
-        st.write("Total Expenses:", df["Amount"].sum())
-        st.bar_chart(df.groupby("Category")["Amount"].sum())
-    else:
-        st.write("No expenses yet.")
+        df["Date"] = pd.to_datetime(df["Date"])
+        current_month = df[df["Date"].dt.to_period("M") == pd.Timestamp.today().to_period("M")]
+        total = df["Amount"].sum()
+        this_month = current_month["Amount"].sum()
+        largest = df["Amount"].max()
 
-elif page == "History":
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Total expenses", f"${total:,.2f}")
+        col2.metric("This month", f"${this_month:,.2f}")
+        col3.metric("Largest expense", f"${largest:,.2f}")
+
+        st.subheader("Spending by category")
+        st.bar_chart(df.groupby("Category")["Amount"].sum())
+
+        st.subheader("This month spending trend")
+        if not current_month.empty:
+            trend = current_month.groupby(current_month["Date"].dt.day)["Amount"].sum()
+            st.line_chart(trend)
+        else:
+            st.info("No expenses recorded for this month yet.")
+    else:
+        st.write("No expenses yet. Add one on the Add Expense page.")
+
+elif page == "Expense History":
     st.header("Expense History")
     st.dataframe(df)
-    if not df.empty:
-        if st.button("Delete Last Expense"):
-            df = df.drop(df.index[-1])
-            df.to_csv(data_files, index=False)
-            st.success("Last expense deleted!")
-            st.rerun()
 
 elif page == "Add Expense":
-    st.header("Add New Expense")
+    st.header("Add Expense")
     with st.form("expense_form"):
-        date = st.date_input("Date")
-        amount = st.number_input("Amount", min_value=0.0)
-        category = st.text_input("Category")
+        expense_date = st.date_input("Date", value=date.today())
+        amount = st.number_input("Amount", min_value=0.01, step=0.01)
+        category = st.selectbox("Category", st.session_state.categories)
         description = st.text_input("Description")
-        submitted = st.form_submit_button("Add Expense")
+        submitted = st.form_submit_button("Save Expense")
+
         if submitted:
-            new_row = {"Date": date, "Amount": amount, "Category": category, "Description": description}
-            df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
-            df.to_csv(data_files, index=False)
-            st.success("Expense added!")
+            if amount <= 0:
+                st.error("Amount must be greater than 0.")
+            else:
+                new_row = {
+                    "Date": expense_date,
+                    "Amount": amount,
+                    "Category": category,
+                    "Description": description,
+                }
+                df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
+                df.to_csv(data_file, index=False)
+                st.success("Expense added!")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+st.markdown("---")
+st.caption("Tip: use the sidebar to add custom categories, then select them when adding a new expense.")
