@@ -99,7 +99,7 @@ with st.sidebar:
             save_budgets(st.session_state.budgets)
             st.success("Budgets saved!")
 
-# Main navigation
+# Main point navigation
 page = st.sidebar.selectbox("Navigate", ["Dashboard", "Expenses", "Income", "Edit/Delete", "Analytics"])
 
 if page == "Dashboard":
