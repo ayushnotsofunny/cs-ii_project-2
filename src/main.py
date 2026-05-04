@@ -69,7 +69,7 @@ st.set_page_config(page_title="Personal Finance Tracker", layout="wide")
 st.title("💰 Personal Finance Tracker")
 st.write("Track expenses & income, manage budgets, and review analytics.")
 
-# Sidebar: Category & Budget Settings
+# Sidebar: Category & Budget Setting
 with st.sidebar:
     st.header("Settings")
     
