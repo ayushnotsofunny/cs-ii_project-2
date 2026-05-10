@@ -41,7 +41,7 @@ def save_budgets(budgets):
 
 # Load data
 expenses_path = get_data_path("expenses.csv")
-income_file = get_data_path("income.csv")
+income_path = get_data_path("income.csv")
 
 try:
     if os.path.exists(expenses_path) and os.path.getsize(expenses_path) > 0:
@@ -52,8 +52,8 @@ except Exception:
     df_expenses = pd.DataFrame(columns=["Date", "Amount", "Category", "Description"])
 
 try:
-    if os.path.exists(income_file) and os.path.getsize(income_file) > 0:
-        df_income = pd.read_csv(income_file, parse_dates=["Date"])
+    if os.path.exists(income_path) and os.path.getsize(income_path) > 0:
+        df_income = pd.read_csv(income_path, parse_dates=["Date"])
     else:
         df_income = pd.DataFrame(columns=["Date", "Amount", "Category", "Description"])
 except Exception:
