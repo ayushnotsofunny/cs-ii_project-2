@@ -40,12 +40,12 @@ def save_budgets(budgets):
         json.dump(budgets, f, indent=2)
 
 # Load data
-expenses_file = get_data_path("expenses.csv")
+expenses_path = get_data_path("expenses.csv")
 income_file = get_data_path("income.csv")
 
 try:
-    if os.path.exists(expenses_file) and os.path.getsize(expenses_file) > 0:
-        df_expenses = pd.read_csv(expenses_file, parse_dates=["Date"])
+    if os.path.exists(expenses_path) and os.path.getsize(expenses_path) > 0:
+        df_expenses = pd.read_csv(expenses_path, parse_dates=["Date"])
     else:
         df_expenses = pd.DataFrame(columns=["Date", "Amount", "Category", "Description"])
 except Exception:
