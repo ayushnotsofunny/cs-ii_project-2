@@ -109,12 +109,12 @@ if page == "Dashboard":
         df_expenses["Date"] = pd.to_datetime(df_expenses["Date"])
         df_income["Date"] = pd.to_datetime(df_income["Date"])
         
-        current_month = df_expenses[df_expenses["Date"].dt.to_period("M") == pd.Timestamp.today().to_period("M")]
+        current_month_expenses = df_expenses[df_expenses["Date"].dt.to_period("M") == pd.Timestamp.today().to_period("M")]
         current_month_income = df_income[df_income["Date"].dt.to_period("M") == pd.Timestamp.today().to_period("M")]
         
         total_expenses = df_expenses["Amount"].sum() if not df_expenses.empty else 0
         total_income = df_income["Amount"].sum() if not df_income.empty else 0
-        this_month_expenses = current_month["Amount"].sum() if not current_month.empty else 0
+        this_month_expenses = current_month_expenses["Amount"].sum() if not current_month_expenses.empty else 0
         this_month_income = current_month_income["Amount"].sum() if not current_month_income.empty else 0
         net = total_income - total_expenses
         
