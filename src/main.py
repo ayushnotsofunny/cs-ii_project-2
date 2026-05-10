@@ -5,11 +5,11 @@ import json
 from datetime import date, timedelta
 
 app_path = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(app_path, "data")
-os.makedirs(DATA_DIR, exist_ok=True)
+data_dir = os.path.join(app_path, "data")
+os.makedirs(data_dir, exist_ok=True)
 
 def get_data_path(filename: str) -> str:
-    return os.path.join(DATA_DIR, filename)
+    return os.path.join(data_dir, filename)
 
 def load_categories():
     path = get_data_path("categories.json")
