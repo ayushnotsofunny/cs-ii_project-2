@@ -55,4 +55,4 @@ elif page == "Add Expense":
 if not df.empty and st.sidebar.button("Delete Last Expense"):
     df = df[:-1]
     df.to_csv(data_file, index=False)
-    st.sidebar.success("Last expense deleted!")
+    st.sidebar.success("Last expense deleted")
