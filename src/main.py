@@ -12,10 +12,10 @@ def get_data_path(filename: str) -> str:
     return os.path.join(data_dir, filename)
 
 def load_categories():
-    path = get_data_path("categories.json")
-    if os.path.exists(path):
+    categories_path = get_data_path("categories.json")
+    if os.path.exists(categories_path):
         try:
-            with open(path, "r", encoding="utf-8") as f:
+            with open(categories_path, "r", encoding="utf-8") as f:
                 return json.load(f)
         except Exception:
             pass
