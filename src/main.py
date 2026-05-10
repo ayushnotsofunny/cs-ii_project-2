@@ -4,8 +4,8 @@ import os
 import json
 from datetime import date, timedelta
 
-APP_PATH = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(APP_PATH, "data")
+app_path = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(app_path, "data")
 os.makedirs(DATA_DIR, exist_ok=True)
 
 def get_data_path(filename: str) -> str:
