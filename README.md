@@ -1,6 +1,6 @@
 # Personal Finance Tracker
 
-A lightweight Streamlit app to track expenses, income, budgets, and categories.
+A comprehensive personal finance management tool built with Streamlit. This application allows users to effortlessly track their expenses, monitor income streams, set and manage budgets across different categories, and gain insights through interactive dashboards and analytics. Designed for individuals seeking better control over their financial health, it provides an intuitive interface for recording transactions, visualizing spending patterns, and achieving financial goals.
 
 ## Features
 
