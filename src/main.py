@@ -26,10 +26,10 @@ def save_categories(categories):
         json.dump(categories, f, indent=2)
 
 def load_budgets():
-    path = get_data_path("budgets.json")
-    if os.path.exists(path):
+    budgets_path = get_data_path("budgets.json")
+    if os.path.exists(budgets_path):
         try:
-            with open(path, "r", encoding="utf-8") as f:
+            with open(budgets_path, "r", encoding="utf-8") as f:
                 return json.load(f)
         except Exception:
             pass
