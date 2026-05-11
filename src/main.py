@@ -166,7 +166,7 @@ elif page == "Expenses":
                     "Description": exp_description,
                 }
                 df_expenses = pd.concat([df_expenses, pd.DataFrame([new_row])], ignore_index=True)
-                df_expenses.to_csv(expenses_file, index=False)
+                df_expenses.to_csv(expenses_path, index=False)
                 st.success("Expense added!")
     
     with col2:
@@ -199,7 +199,7 @@ elif page == "Income":
                     "Description": inc_description,
                 }
                 df_income = pd.concat([df_income, pd.DataFrame([new_inc])], ignore_index=True)
-                df_income.to_csv(income_file, index=False)
+                df_income.to_csv(income_path, index=False)
                 st.success("Income added!")
     
     with col2:
@@ -228,7 +228,7 @@ elif page == "Edit/Delete":
             
             if st.button("Delete selected expense"):
                 df_expenses = df_expenses.drop(index=selected_idx).reset_index(drop=True)
-                df_expenses.to_csv(expenses_file, index=False)
+                df_expenses.to_csv(expenses_path, index=False)
                 st.success("Expense deleted!")
                 st.rerun()
             
@@ -253,7 +253,7 @@ elif page == "Edit/Delete":
                     df_expenses.at[edit_idx, "Amount"] = edit_amount
                     df_expenses.at[edit_idx, "Category"] = edit_category
                     df_expenses.at[edit_idx, "Description"] = edit_description
-                    df_expenses.to_csv(expenses_file, index=False)
+                    df_expenses.to_csv(expenses_path, index=False)
                     st.success("Expense updated!")
                     st.rerun()
             
@@ -274,7 +274,7 @@ elif page == "Edit/Delete":
             
             if st.button("Delete selected income"):
                 df_income = df_income.drop(index=selected_inc_idx).reset_index(drop=True)
-                df_income.to_csv(income_file, index=False)
+                df_income.to_csv(income_path, index=False)
                 st.success("Income deleted!")
                 st.rerun()
             
@@ -299,7 +299,7 @@ elif page == "Edit/Delete":
                     df_income.at[edit_inc_idx, "Amount"] = edit_inc_amount
                     df_income.at[edit_inc_idx, "Category"] = edit_inc_category
                     df_income.at[edit_inc_idx, "Description"] = edit_inc_description
-                    df_income.to_csv(income_file, index=False)
+                    df_income.to_csv(income_path, index=False)
                     st.success("Income updated!")
                     st.rerun()
             
