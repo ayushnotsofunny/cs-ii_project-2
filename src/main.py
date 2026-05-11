@@ -66,7 +66,7 @@ if "budgets" not in st.session_state:
     st.session_state.budgets = load_budgets()
 
 st.set_page_config(page_title="Personal Finance Tracker", layout="wide")
-st.title("💰 Personal Finance Tracker")
+st.title("Personal Finance Tracker")
 st.write("Track expenses & income, manage budgets, and review analytics.")
 
 # Sidebar: Category & Budget Setting
